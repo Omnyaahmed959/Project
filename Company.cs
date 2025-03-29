@@ -38,12 +38,39 @@ namespace Project
         }
         public void GenerateReport()
         {
-            Console.WriteLine("\n Employee Report:");
-            foreach (var dept in Departments)
+            TopPerformers.Clear();
+            foreach(Employee emp in Employees)
             {
-                Console.WriteLine($"\n {dept.Name}");
-                dept.ListEmployees();
+                double averageRating = emp.PerformanceRatings.Count > 0 ? emp.PerformanceRatings.Average() : 0;
+                if(averageRating >= 9)
+                {
+                    TopPerformers.Add(emp);
+                }
+            }
+        public void GenerateReport()
+        {
+            Console.WriteLine($"\nCompany Report: {Name}");
+            Console.WriteLine("--------------------------");
+        }
+            foreach(Department dep in Departments)
+            {
+                Console.WriteLine($"Department: {dep.Name}");
+                dep.ListEmployees();
+                Console.WriteLine("-----------------------");
+            }
 
+            if (TopPerformers.Count == 0)
+            {
+                Console.WriteLine("No top performers found");
+            }
+            else
+            {
+                Console.WriteLine("Top Performers: ");
+                foreach (Employee emp in TopPerformers)
+                {
+                    double avgRating = emp.PerformanceRatings.Count > 0 ? emp.PerformanceRatings.Average() : 0;
+                    Console.WriteLine($"{emp.Name} Avg Rating: {avgRating}");
+                }
             }
         }
 
