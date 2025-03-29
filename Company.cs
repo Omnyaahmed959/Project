@@ -10,6 +10,8 @@ namespace Project
     {
         private List<Department> Departments;
         private List<Employee> Employees;
+        public List<Employee> TopPerformers { get; private set; } = new List<Employee>();
+
 
         public Company()
         {
